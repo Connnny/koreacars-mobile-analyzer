@@ -43,6 +43,19 @@ npm install
 
 ---
 
+## Alles nach einem Neustart starten
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\start_all.ps1
+# oder: Doppelklick auf start_all.ps1
+```
+
+Das Skript startet (nur was noch nicht läuft): **Ollama**, **Web-App** (http://127.0.0.1:8787) und **Telegram-Bot** (wenn `bot_token.txt` existiert). Logs liegen unter `logs/`.
+
+**Autostart beim Hochfahren (optional):**
+- `Win + R` → `shell:startup` → Verknüpfung zu `start_all.ps1` dort hineinlegen, oder
+- Task Scheduler → neue Aufgabe „Beim Anmelden“ → Programm `powershell.exe`, Argumente `-ExecutionPolicy Bypass -File "…\start_all.ps1"`.
+
 ## Schnellstart Web-App
 
 ```bash
