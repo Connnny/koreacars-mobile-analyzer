@@ -1,0 +1,118 @@
+﻿<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Koreacars Analyzer â†’ mobile.de</title>
+<link rel="stylesheet" href="/static/style.css?v=20260704" />
+</head>
+<body>
+<header>
+  <div class="hd-inner">
+    <div class="brand">ðŸš— Koreacars <span>Analyzer</span></div>
+    <div class="loadbox">
+      <input id="carInput" type="text" placeholder="koreacars.de-URL oder Katalog-ID, z. B. 41838631" autocomplete="off" spellcheck="false" />
+      <button id="btnLoad" class="primary">Fahrzeug laden</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <aside id="side">
+    <h3>Zuletzt analysiert</h3>
+    <div id="history"></div>
+  </aside>
+
+  <section id="content">
+    <div id="empty" class="card hint">
+      Gib oben eine <b>koreacars.de/#/catalog/&lt;ID&gt;</b>-URL oder einfach die ID ein, um das Fahrzeug
+      zu laden. Danach suchst du vergleichbare Autos auf mobile.de und berechnest die Wiederverkaufs-Marge.
+    </div>
+
+    <!-- Schritt 1 -->
+    <div id="vehiclePane" class="hidden">
+      <div class="card" id="vehicleCard"></div>
+    </div>
+
+    <!-- Schritt 2 -->
+    <div id="searchPane" class="hidden">
+      <div class="card">
+        <h2>2 Â· mobile.de-Suche</h2>
+        <div class="grid searchgrid">
+          <label>Marke
+            <input type="text" id="fMake" list="dlMakes" placeholder="z. B. BMW" autocomplete="off" />
+            <datalist id="dlMakes"></datalist>
+          </label>
+          <label>Modell
+            <input type="text" id="fModel" list="dlModels" placeholder="z. B. 4er Â· C-Klasse Â· CLE Â· A7" autocomplete="off" />
+            <datalist id="dlModels"></datalist>
+          </label>
+          <label>Modellvariante (optional)
+            <input type="text" id="fVariant" list="dlVariants" placeholder="z. B. M Paket Â· Avantgarde Â· AMG" autocomplete="off" />
+            <datalist id="dlVariants"></datalist>
+          </label>
+          <label>Motorisierung
+            <select id="fFuel">
+              <option value="">egal</option>
+              <option value="Petrol">Benzin</option>
+              <option value="Diesel">Diesel</option>
+              <option value="Hybrid">Hybrid (inkl. Plug-in)</option>
+              <option value="Electric">Elektro</option>
+            </select>
+          </label>
+          <label>Fahrzeugtyp
+            <select id="fBody">
+              <option value="">egal</option>
+              <option value="Limousine">Limousine</option>
+              <option value="Kombi">Kombi</option>
+              <option value="CoupÃ©">CoupÃ©</option>
+              <option value="Cabrio">Cabrio / Cabriolet</option>
+              <option value="GT">Gran Turismo (GT)</option>
+              <option value="SUV">SUV / GelÃ¤ndewagen</option>
+              <option value="Van">Van / Bus</option>
+              <option value="Roadster">Roadster</option>
+            </select>
+          </label>
+          <label>EZ von (Jahr)<input type="number" id="fYearFrom" /></label>
+          <label>EZ bis (Jahr)<input type="number" id="fYearTo" /></label>
+          <label>Kilometer von<input type="number" id="fKmFrom" placeholder="z. B. 50000" /></label>
+          <label>Kilometer bis<input type="number" id="fKmTo" placeholder="z. B. 150000" /></label>
+          <label>Max. Preis (â‚¬, leer = keine)<input type="number" id="fPriceMax" /></label>
+          <label>PS min (optional)<input type="number" id="fPsMin" /></label>
+          <label>PS max (optional)<input type="number" id="fPsMax" /></label>
+          <label class="wide">ZusÃ¤tzliche Suchbegriffe (optional, eine Zeile je Suchlauf â€“ sonst automatisch)
+            <textarea id="fQueries" rows="1" placeholder="leer lassen = automatisch nach Marke/Modell"></textarea></label>
+        </div>
+        <div id="searchNote" class="note"></div>
+        <div class="actions">
+          <button id="btnSearch" class="primary">Vergleichsfahrzeuge auf mobile.de suchen</button>
+          <span id="searchState" class="state"></span>
+        </div>
+        <div id="progressLog" class="log hidden"></div>
+      </div>
+    </div>
+
+    <!-- Schritt 3 -->
+    <div id="resultPane" class="hidden">
+      <div class="card">
+        <h2>3 Â· Ergebnisse auf mobile.de</h2>
+        <div class="actions">
+          <button id="btnAnalyze" class="primary">Margen fÃ¼r Auswahl berechnen</button>
+          <button id="btnSelectCore" class="ghost">wahrscheinliche Treffer wÃ¤hlen</button>
+          <button id="btnUnselect" class="ghost">Auswahl lÃ¶schen</button>
+          <span id="selCount" class="state"></span>
+        </div>
+        <div id="resultTableWrap"></div>
+      </div>
+    </div>
+
+    <!-- Schritt 4 -->
+    <div id="analysisPane" class="hidden">
+      <div class="card" id="analysisCard"></div>
+    </div>
+  </section>
+</main>
+<footer>Lokales Tool Â· mobile.de-Seiten werden Ã¼ber den Google-Render-Proxy geladen (direkter Zugriff ist aus diesem Netz geblockt) Â· Preise sind Angebotspreise zum Abrufzeitpunkt.</footer>
+<script src="/static/app.js?v=20260704"></script>
+</body>
+</html>

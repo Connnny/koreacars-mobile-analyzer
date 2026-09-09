@@ -1,0 +1,22 @@
+# Abhängigkeiten & Build
+node_modules/
+
+# Laufzeit-Caches (Fahrzeug-Daten, mobile.de-Seiten)
+results/
+cache/
+
+# Geheimnisse / lokal
+bot_token.txt
+.env
+.env.local
+*.log
+
+# Bilder/Medien (falls Screenshots etc. anfallen)
+*.png
+*.jpg
+*.jpeg
+*.webp
+
+# OS
+.DS_Store
+Thumbs.db
